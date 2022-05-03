@@ -1,31 +1,32 @@
-schemaVersion: 2.1.0
-metadata:
-  name: terminal-only
-events:
-  preStart:
-    - init-container-command
-components:
-  - name: dummy
-    container:
-      image: registry.access.redhat.com/ubi8/ubi-micro
-      command:
-        - sleep
-        - infinity
-      memoryLimit: 32Mi
-      memoryRequest: 32Mi
-      cpuLimit: 30m
-      cpuRequest: 30m
-      endpoints:
-        - name: terminal
-          attributes:
-            type: main
-            cookiesAuthEnabled: true
-            discoverable: false
-            urlRewriteSupported: true
-          targetPort: 3100
-          exposure: public
-          secure: false
-          protocol: https
-    attributes:
-      app.kubernetes.io/component: terminal
-      app.kubernetes.io/part-of: terminal.che.eclipse.org
+inline:
+  schemaVersion: 2.1.0
+  metadata:
+    name: terminal-only
+  events:
+    preStart:
+      - init-container-command
+  components:
+    - name: dummy
+      container:
+        image: registry.access.redhat.com/ubi8/ubi-micro
+        command:
+          - sleep
+          - infinity
+        memoryLimit: 32Mi
+        memoryRequest: 32Mi
+        cpuLimit: 30m
+        cpuRequest: 30m
+        endpoints:
+          - name: terminal
+            attributes:
+              type: main
+              cookiesAuthEnabled: true
+              discoverable: false
+              urlRewriteSupported: true
+            targetPort: 3100
+            exposure: public
+            secure: false
+            protocol: https
+      attributes:
+        app.kubernetes.io/component: terminal
+        app.kubernetes.io/part-of: terminal.che.eclipse.org
