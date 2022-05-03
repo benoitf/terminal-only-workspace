@@ -1,0 +1,32 @@
+schemaVersion: 2.1.0
+metadata:
+  name: terminal-only
+components:
+
+  - name: tools
+    container:
+      image: quay.io/devfile/universal-developer-image:ubi8-latest
+      args:
+       - "wget"
+       - "https://github.com/tsl0922/ttyd/releases/download/1.6.3/ttyd.x86_64"
+       - "-O"
+       - "/tmp/ttyd"
+       - "&&"
+       - "chmod"
+       - "755"
+       - "/tmp/ttyd"
+       - "&&"
+       - "/tmp/ttyd"
+       - "-p"
+       - "3100"
+       - "/bin/bash"
+      memoryLimit: 3Gi
+      endpoints:
+        - exposure: none
+          name: debug
+          protocol: tcp
+          targetPort: 5005
+        - exposure: public
+          name: 8080-tcp
+          protocol: http
+          targetPort: 8080
