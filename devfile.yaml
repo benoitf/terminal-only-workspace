@@ -7,19 +7,9 @@ components:
     container:
       image: quay.io/devfile/universal-developer-image:ubi8-latest
       args:
-       - "wget"
-       - "https://github.com/tsl0922/ttyd/releases/download/1.6.3/ttyd.x86_64"
-       - "-O"
-       - "/tmp/ttyd"
-       - "&&"
-       - "chmod"
-       - "755"
-       - "/tmp/ttyd"
-       - "&&"
-       - "/tmp/ttyd"
-       - "-p"
-       - "3100"
-       - "/bin/bash"
+       - "sh"
+       - "-c"
+       - "wget https://github.com/tsl0922/ttyd/releases/download/1.6.3/ttyd.x86_64 -O /tmp/ttyd && chmod 755 /tmp/ttyd && /tmp/ttyd -p 3100 /bin/bash"
       memoryLimit: 3Gi
       endpoints:
         - exposure: none
